@@ -1,0 +1,47 @@
+    1  terraform
+   ***** installation *****
+   2  sudo yum install -y yum-utils
+    3  sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+    4  sudo yum -y install terraform
+   ******************************** 
+    5  terraform --version
+    6  mkdir s3-bucket
+    7  cd s3-bucket
+    8  nano main.tf    >>>>>>> operational code
+  ====================================  
+   resource "aws_s3_bucket" "b" {
+  bucket = "[name]-tf-test-bucket"
+
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket_acl" "example" {
+  bucket = aws_s3_bucket.b.id
+  acl    = "private"
+}  
+==========================================
+    
+    9  terraform init
+   10  terraform validate
+   11  terraform plan   >>>>> will show you an error that AWS needs to be configured. This can be done in two ways. provide aws access and secret id on CLI with aws configure or set up an IAM role with adminstrators access.
+   12  aws configure
+   13  clear
+   14  terraform plan
+   15  terraform apply
+   16  nano main.tf
+   17  terraform apply
+   18  terraform destroy
+   19  cd
+   20  ls -la
+   21  cd .aws
+   22  ls -l
+   23  cat credentials
+   24  rm -rf credentials
+   25  ls -l
+   26  cd ..
+   27  cd s3-bucket
+   28  terraform apply
+   29  terraform destroy
