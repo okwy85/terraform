@@ -30,7 +30,7 @@ resource "aws_s3_bucket_acl" "example" {
    12  aws configure
    13  clear
    14  terraform plan
-   15  terraform apply
+   15  terraform apply --auto-approve
    16  nano main.tf
    17  terraform apply
    18  terraform destroy
